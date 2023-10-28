@@ -15,7 +15,7 @@ int isMagic(int square[3][3]) {
     sums[6] = square[0][0] + square[1][1] + square[2][2]; // first diagonal
     sums[7] = square[2][0] + square[1][1] + square[0][2]; // second diagonal
 
-    for (int i = 0; i < 6; i++){
+    for (int i = 0; i < 7; i++){
         if (sums[i] != sums[i + 1]){
             return 0;
         }
@@ -25,65 +25,61 @@ int isMagic(int square[3][3]) {
 
 }
 
-int loopUntilMagic() {
-    int startingSquare[3][3] = {{1,2,3}, 
-                            {4,5,6}, 
-                            {7,8,9}};
-
-    for(int i = 0; i < 3; i++){
-        printf("[%d ", startingSquare[i][0]);
-        printf("%d ", startingSquare[i][1]);
-        printf("%d]\n", startingSquare[i][2]);
-    }
-
+int loopUntilMagic(int square[3][3]) {
     int magic_tracker = 0;
     int counter = 0;
 
-    int firstRow = 0;
-    int secondRow = 0;
-    int firstCol = 0;
-    int secondCol = 0;
-    int temp = 0;
-
-    while(magic_tracker == 0){
+    while (isMagic(square) == 0){
         counter++;
-        firstRow = rand() % 4;
-        secondRow = rand() % 4;
-        firstCol = rand() % 4;
-        secondCol = rand() % 4;
+        int firstRow = rand() % 3;
+        int secondRow = rand() % 3;
+        int firstCol = rand() % 3;
+        int secondCol = rand() % 3;
 
         while(firstRow == secondRow && firstCol == secondCol){
-            secondRow = rand() % 4;
-            secondCol = rand() % 4;
+            secondRow = rand() % 3;
+            secondCol = rand() % 3;
         }
 
-        temp = startingSquare[firstRow][firstCol];
-        startingSquare[firstRow][firstCol] = startingSquare[secondRow][secondCol];
-        startingSquare[secondRow][secondCol] = temp;
+        int temp = square[firstRow][firstCol];
+        square[firstRow][firstCol] = square[secondRow][secondCol];
+        square[secondRow][secondCol] = temp;
 
-        if(isMagic(startingSquare) == 1){
-            magic_tracker = 1;
+        if(isMagic(square) == 1){
+            break;
         }
 
+    }
+
+    printf("LoShu Square generated in %d shuffles!\n", counter);
+
+    for(int i = 0; i < 3; i++){
+        printf("[%d ", square[i][0]);
+        printf("%d ", square[i][1]);
+        printf("%d]\n", square[i][2]);
     }
 
 }
 
 int main() {
-    int my_square[3][3] = {{4,9,2}, 
+    int magic_square[3][3] = {{4,9,2}, 
                             {3,5,7}, 
                             {8,1,6}};
     
-    int isSquare = isMagic(my_square);
+    int isSquare = isMagic(magic_square);
 
-    if (isMagic(my_square) == 0) {
-        printf("Not a magic squrare");
+    if (isMagic(magic_square) == 0) {
+        printf("Your input is not a magic square.\n");
     }
     else {
-        printf("This is a magic square!");
+        printf("Your input is a magic square!\n");
     }
 
-   int run = loopUntilMagic();
+    int rand_square[3][3] = {{6,5,2}, 
+                            {3,9,8}, 
+                            {7,1,4}};
+
+   int run = loopUntilMagic(rand_square);
 
     return 0;
 }
