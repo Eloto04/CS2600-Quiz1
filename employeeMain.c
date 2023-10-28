@@ -34,6 +34,30 @@ int main(void){
         printf("Employee Tony Bobcat is in record %d\n", matchPtr - EmployeeTable); 
     else 
         printf("Employee Tony Bobcat is NOT found in the record\n"); 
+
+    matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "909-555-2134"); 
+    if (matchPtr != NULL) 
+        printf("Employee with number 909-555-2134 is in record %d\n", matchPtr - EmployeeTable); 
+    else 
+        printf("Employee with number 909-555-2134 is NOT found in the record\n");
+
+    matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "909-555-8743"); 
+    if (matchPtr != NULL) 
+        printf("Employee with number 909-555-8743 is in record %d\n", matchPtr - EmployeeTable); 
+    else 
+        printf("Employee with number 909-555-8743 is NOT found in the record\n");
+
+    matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 8.78); 
+    if (matchPtr != NULL) 
+        printf("Employee with salary 8.78 is in record %d\n", matchPtr - EmployeeTable); 
+    else 
+        printf("Employee with salary 8.78 is NOT found in the record\n");
+
+    matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 3.43); 
+    if (matchPtr != NULL) 
+        printf("Employee with salary 3.43 is in record %d\n", matchPtr - EmployeeTable); 
+    else 
+        printf("Employee with salary 3.43 is NOT found in the record\n");
      
     return EXIT_SUCCESS; 
 } 
